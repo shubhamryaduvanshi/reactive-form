@@ -1,0 +1,67 @@
+<div class="wrapper">
+  <div class="title">Card Details</div>
+  <form [formGroup]="paymentCardForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="input-container">
+      <label for="cardHolderName">Card Holder Name</label>
+      <input type="text" formControlName="cardHolderName" />
+      <div
+        *ngIf="
+          cardHolderName?.invalid &&
+          (cardHolderName?.dirty || cardHolderName?.touched)
+        "
+        class="input-error"
+      >
+        <div *ngIf="cardHolderName?.hasError('required')">
+          Card Holder Name is required.
+        </div>
+        <div *ngIf="cardHolderName?.hasError('minlength')">
+          Card Holder Name must be at least 3 characters long.
+        </div>
+        <div *ngIf="cardHolderName?.hasError('maxlength')">
+          Card Holder Name cannot be more than 50 characters long.
+        </div>
+      </div>
+    </div>
+    <div class="input-container">
+      <label for="cardNumber">Card Number</label>
+      <input type="text" formControlName="cardNumber" />
+      <div
+        *ngIf="
+          cardNumber?.invalid && (cardNumber?.dirty || cardNumber?.touched)
+        "
+        class="input-error"
+      >
+        <div *ngIf="cardNumber?.hasError('required')">
+          Card Number is required.
+        </div>
+        <div *ngIf="cardNumber?.hasError('minlength')">
+          Card Number must be at least 16 digits long.
+        </div>
+        <div *ngIf="cardNumber?.hasError('maxlength')">
+          Card Number cannot be more than 16 digits long.
+        </div>
+        <div *ngIf="cardNumber?.hasError('pattern')">
+          Card Number must be a number.
+        </div>
+      </div>
+    </div>
+    <div class="input-container">
+      <label for="cvv">CVV</label>
+      <input type="text" formControlName="cvv" />
+      <div
+        *ngIf="cvv?.invalid && (cvv?.dirty || cvv?.touched)"
+        class="input-error"
+      >
+        <div *ngIf="cvv?.hasError('required')">CVV is required.</div>
+        <div *ngIf="cvv?.hasError('minlength')">
+          CVV must be at least 3 digits long.
+        </div>
+        <div *ngIf="cvv?.hasError('maxlength')">
+          CVV cannot be more than 3 digits long.
+        </div>
+        <div *ngIf="cvv?.hasError('pattern')">CVV must be a number.</div>
+      </div>
+    </div>
+    <button type="submit" class="submit-btn">Submit</button>
+  </form>
+</div>
